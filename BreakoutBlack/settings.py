@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", ]
+ALLOWED_HOSTS = ["localhost", 'https://www.breakoutblack.biz', 'https://breakoutblack.biz',]
 
 
 # Application definition
@@ -199,9 +199,9 @@ LOGOUT_REDIRECT_URL = "store:home"
 if os.getenv("PRODUCTION"):
     django_heroku.settings(locals())
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost:8000", ]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8000", 'https://www.breakoutblack.biz', 'https://breakoutblack.biz',]
 
-CORS_ALLOWED_ORIGINS = ['http://localhost:8000', ]
+CORS_ALLOWED_ORIGINS = ['http://localhost:8000', 'https://www.breakoutblack.biz', 'https://breakoutblack.biz', ]
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True

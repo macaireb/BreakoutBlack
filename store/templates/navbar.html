@@ -7,12 +7,12 @@
         <!-- Brand -->
         <!-- Navbar brand -->
         <div class="d-flex">
-            <a href="{% url 'core:home' %}" class="nav-brand mt-2 mt-lg-0 "
+            <a href="{% url 'store:home' %}" class="nav-brand mt-2 mt-lg-0 "
                target="_self">
                 <img
-                        src="{% static 'img/logo.PNG' %}"
+                        src="{% static 'img/logos.PNG' %}"
                         height="20"
-                        alt="822 Customz Logo"
+                        alt="Black Breakout Business"
                         loading="lazy"
                 />
             </a>`
@@ -29,24 +29,22 @@
                         </a>
                     </li>
                     <li class="nav-item order-2">
-                        <a href="{% url 'core:AddCategory' %}" class="nav-link" target="_self">
+                        <a href="{% url 'store:AddCategory' %}" class="nav-link" target="_self">
                             Add Product Category
                         </a>
                     </li>
                     <li class="nav-item order-3">
-                        <a href="{% url 'core:Orders' %}" class="nav-link" target="_self">
+                        <a href="{% url 'store:Orders' %}" class="nav-link" target="_self">
                             View Orders
                         </a>
                     </li>
-                    {% if request.user|cart_item_count > 0 %}
-                        <li class="nav-item nav-flex-icons order-4">
-                            <a href="{% url 'core:order_summary' %}" class="nav-link" target="_self">
-                                <span class="badge red z-depth-1 me-1" id="cart"> {{ request.user|cart_item_count }} </span>
-                                <i class="fas fa-shopping-cart"></i>
-                                <span class="clearfix d-none d-sm-inline-block"> Cart </span>
-                            </a>
-                        </li>
-                    {% endif %}
+                    <li class="nav-item nav-flex-icons order-4">
+                        <a href="{% url 'store:order_summary' %}" class="nav-link" target="_self">
+                                <span class="badge red z-depth-1 me-1" id="cart"> <i class="fas fa-shopping-cart"></i>
+                                </span>
+                            <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+                        </a>
+                    </li>
                     <li class="nav-item order-5">
                         <a href="{% url 'account_logout' %} " class="nav-link" target="_self">
                             Logout

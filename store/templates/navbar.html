@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light align-items-start col-12">
     <!-- Container wrapper -->
@@ -24,22 +25,17 @@
                 <ul class="navbar-nav flex-row ml-md-auto d-md-flex">
                     {% if request.user.is_authenticated %}
                     <li class="nav-item order-1">
-                        <a href="{% url 'upload:upload' %}" class="nav-link" target="_self">
+                        <a href="{% url 'store:new_product' %}" class="nav-link" target="_self">
                             Add Product
                         </a>
                     </li>
                     <li class="nav-item order-2">
-                        <a href="{% url 'store:AddCategory' %}" class="nav-link" target="_self">
+                        <a href="{% url 'store:new_product' %}" class="nav-link" target="_self">
                             Add Product Category
                         </a>
                     </li>
-                    <li class="nav-item order-3">
-                        <a href="{% url 'store:Orders' %}" class="nav-link" target="_self">
-                            View Orders
-                        </a>
-                    </li>
                     <li class="nav-item nav-flex-icons order-4">
-                        <a href="{% url 'store:order_summary' %}" class="nav-link" target="_self">
+                        <a href="{% url 'store:home' %}" class="nav-link" target="_self">
                                 <span class="badge red z-depth-1 me-1" id="cart"> <i class="fas fa-shopping-cart"></i>
                                 </span>
                             <span class="clearfix d-none d-sm-inline-block"> Cart </span>
@@ -62,7 +58,7 @@
                         </a>
                     </li>
                     <li class="nav-item order-8">
-                        <a href="{% url 'account_signup' %} " class="nav-link" target="_self">
+                        <a href="{% provider_login_url 'github' %} " class="nav-link" target="_self">
                             Signup
                         </a>
                     </li>

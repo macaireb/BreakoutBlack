@@ -1,1 +1,1 @@
-web: gunicorn BreakoutBlack.wsgi --log-file
+web: gunicorn BreakoutBlack.wsgi

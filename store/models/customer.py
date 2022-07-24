@@ -1,5 +1,6 @@
 from django.db import models
-from BreakoutBlack import settings
+from django.conf import settings
+from .product import Order
 from django_countries.fields import CountryField
 
 
@@ -10,6 +11,7 @@ ADDRESS_CHOICES = (
 
 
 class UserProfile(models.Model):
+
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     stripe_customer_id = models.CharField(max_length=50, blank=True, null=True)
     one_click_purchasing = models.BooleanField(default=False)

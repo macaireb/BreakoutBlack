@@ -33,13 +33,13 @@ def default_category():
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, blank=True, null=True)
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("core:home")
+        return reverse("store:home")
 
 
 class Item(models.Model):
@@ -87,22 +87,22 @@ class Item(models.Model):
         return self.title
 
     def get_update_url(self):
-        return reverse("core:UpdateItem", kwargs={
+        return reverse("store:home", kwargs={
             'slug': self.slug
         })
 
     def get_absolute_url(self):
-        return reverse("core:product", kwargs={
+        return reverse("store:home", kwargs={
             'slug': self.slug
         })
 
     def get_add_to_cart_url(self):
-        return reverse("core:add_to_cart", kwargs={
+        return reverse("store:home", kwargs={
             'slug': self.slug
         })
 
     def get_remove_from_cart_url(self):
-        return reverse("core:remove_from_cart", kwargs={
+        return reverse("store:home", kwargs={
             'slug': self.slug
         })
 
@@ -159,5 +159,3 @@ class Order(models.Model):
             total -= self.coupon.amount
         return total
 
-
-default_category()

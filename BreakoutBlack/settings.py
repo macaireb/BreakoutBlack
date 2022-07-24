@@ -48,8 +48,21 @@ INSTALLED_APPS = [
     "allauth.account",
     'allauth.socialaccount',  # new
     'allauth.socialaccount.providers.openid',
+    'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',  # new
 ]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
 
 SITE_ID = 2
 
@@ -58,6 +71,7 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
+ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 MIDDLEWARE = [

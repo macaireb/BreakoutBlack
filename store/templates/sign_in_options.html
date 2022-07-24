@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block head_title %}Breakout Black Business{% endblock head_title %}
+{% block content %}
+{% load socialaccount %}
+<div class="container-fluid">
+    <div class="row d-flex title">
+        <h2 class="text-center">Sign-in Options</h2>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="row d-flex">
+        <span class="text-black text-center">You are already signed in.
+            <a href="{% url 'account_logout' %} " class="nav-link" target="_self">Logout?
+                    </a></span>
+    </div>
+    {% else %}
+
+    <a href="{% provider_login_url 'github' %} " class="badge rounded-pill badge-light" target="_self">
+                            Login with Github
+                        </a>
+    <a href="{% provider_login_url 'google' %} " class="badge rounded-pill badge-danger" target="_self">
+                            Login with Google
+                        </a>
+    <span class="badge rounded-pill badge-dark">Dark</span>
+    {% endif %}
+</div>
+{% endblock content %}

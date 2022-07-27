@@ -50,38 +50,38 @@ class Item(models.Model):
     description = models.TextField()
     image_url = models.URLField(blank=True, null=True)
     album = models.OneToOneField(ImageAlbum, related_name='model', on_delete=models.CASCADE, blank=True, null=True)
-
-    class Color(models.TextChoices):
-        red = 'Red', 'Red'
-        blue = 'Blue', 'Blue'
-        green = 'Green', 'Green'
-        orange = 'Orange', 'Orange'
-        white = 'White', 'White'
-        black = 'Black', 'Black'
-        yellow = 'Yellow', 'Yellow'
-
-    color = models.CharField(choices=Color.choices, max_length=6, unique=True, blank=True, null=True)
-
-    class ShoeSizes(models.TextChoices):
-        six = '6', '6'
-        seven = '7', '7'
-        eight = '8', '8'
-        nine = '9', '9'
-        ten = '10', '10'
-        eleven = '11', '11'
-        twelve = '12', '12'
-        thirteen = '13', '13'
-
-    shoe_sizes = models.CharField(choices=ShoeSizes.choices, max_length=3, blank=True, null=True)
-
-    class ShirtSizes(models.TextChoices):
-        xs = 'Extra-Small', 'Extra-Small'
-        s = 'Small', 'Small'
-        m = 'Medium', 'Medium'
-        L = 'Large', 'Large'
-        xl = 'Extra-Large', 'Extra-Large'
-
-    shirt_sizes = models.CharField(choices=ShirtSizes.choices, max_length=12, blank=True, null=True)
+    #
+    # class Color(models.TextChoices):
+    #     red = 'Red', 'Red'
+    #     blue = 'Blue', 'Blue'
+    #     green = 'Green', 'Green'
+    #     orange = 'Orange', 'Orange'
+    #     white = 'White', 'White'
+    #     black = 'Black', 'Black'
+    #     yellow = 'Yellow', 'Yellow'
+    #
+    # color = models.CharField(choices=Color.choices, max_length=6, unique=True, blank=True, null=True)
+    #
+    # class ShoeSizes(models.TextChoices):
+    #     six = '6', '6'
+    #     seven = '7', '7'
+    #     eight = '8', '8'
+    #     nine = '9', '9'
+    #     ten = '10', '10'
+    #     eleven = '11', '11'
+    #     twelve = '12', '12'
+    #     thirteen = '13', '13'
+    #
+    # shoe_sizes = models.CharField(choices=ShoeSizes.choices, max_length=3, blank=True, null=True)
+    #
+    # class ShirtSizes(models.TextChoices):
+    #     xs = 'Extra-Small', 'Extra-Small'
+    #     s = 'Small', 'Small'
+    #     m = 'Medium', 'Medium'
+    #     L = 'Large', 'Large'
+    #     xl = 'Extra-Large', 'Extra-Large'
+    #
+    # shirt_sizes = models.CharField(choices=ShirtSizes.choices, max_length=12, blank=True, null=True)
 
     def __str__(self):
         return self.title

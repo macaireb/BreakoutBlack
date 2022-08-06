@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 {% block head_title %}Breakout Black Business{% endblock head_title %}
+{% load crispy_forms_tags %}
 {% block content %}
-<div class="container-fluid">
-    <div class="row d-flex title">
-        <h2 class="text-center">Products</h2>
-    </div>
+<div class="row d-flex title">
+    <h2 class="text-center">Breakout Black Business</h2>
 </div>
+<span>
+    <a href="{% url 'store:custom product' %} " class="nav-link" target="_self">
+        Request a Custom Product
+    </a>
+</span>
 {% endblock content %}

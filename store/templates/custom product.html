@@ -3,11 +3,11 @@
 {% block extra_head %}
 <style>
     .form-control {
-        background-color: #fff!important;
+        background-color: gray!important;
     }
 
     .form-outline .form-control {
-        background: #fff!important;
+        background-color: gray!important;
     }
 
 
@@ -21,10 +21,10 @@
 {% endblock extra_head %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="container-fluid m-5 p-4">
+<div class="container-fluid m-5 p-4 col-10">
     <h2 class="text-black text-center">Request Custom Product</h2>
-    <div class="flex-column d-flex">
-        <form class="text-black form-group" action="." method="POST" enctype="multipart/form-data">
+    <div class="flex-column d-flex justify-content-center">
+        <form class="text-white form-group" action="." method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {% if request.user.is_anonymous %}
             <div class="row mb-4">
@@ -57,16 +57,6 @@
                     {{form.category|as_crispy_field}}
                 </div>
             </div>
-            <!--                <div class="row mb-4">
-                                <div class="form-outline">
-                                    {{form.size}}
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <div class="form-outline">
-                                    {{form.color}}
-                                </div>
-                            </div>-->
             <div class="row mb-4">
                 <div class="form-outline">
                     {{form.message|as_crispy_field}}
@@ -91,7 +81,7 @@
             </div>
             {% endif %}
             <!-- Submit button -->
-            <button type="submit" class="btn btn-secondary btn-block">Send Request</button>
+            <button type="submit" class="btn btn-primary btn-block">Send Request</button>
         </form>
     </div>
     <div class="flex-column d-flex">

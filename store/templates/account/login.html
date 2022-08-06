@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+<!--Section: Products v.3-->
+<main>
+    <div class="container">
+        <section class="mb-4">
+            <!--Grid row-->
+            <div class="row wow fadeIn">
+                <div class="col-12 mt-5">
+                    {% if request.user.is_anonymous %}
+                    <h1>{% trans "Sign In" %}</h1>
+
+                    <a href="{% provider_login_url 'google' %} " class="badge rounded-pill badge-danger" target="_self">
+                        Login with Google
+                    </a>
+                    <span>
+                        <hr/>
+                        <b>Or</b>
+                    </span>
+                    <form class="login" method="POST" action="{% url 'account_login' %}">
+                        {% csrf_token %}
+                        {{ form | crispy}}
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                        {% endif %}
+                <a class="btn btn-default" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?"%}</a>
+                        <button class="btn btn-primary" type="submit">{% trans "Sign In" %}</button>
+                    </form>
+                    {% else %}
+                    <h1>You're already signed in</h1>
+
+                    <a href="{% url 'account_logout' %} " class="nav-link" target="_self">
+                        Logout
+                    </a>
+                </div>
+
+                {% endif %}
+            </div>
+        </section>
+    </div>
+</main>
+
+{% endblock %}

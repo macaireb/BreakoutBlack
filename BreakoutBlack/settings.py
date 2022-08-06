@@ -12,14 +12,12 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 
-import django_heroku
 from dotenv import load_dotenv
 
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -30,8 +28,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", 'https://www.breakoutblack.biz', 'https://breakoutblack.biz',]
-
+ALLOWED_HOSTS = ["localhost", 'https://www.breakoutblack.biz', 'https://breakoutblack.biz', '*', '0.0.0.0:8000',
+                 '54.90.179.247:8000', '54.90.179.247']
 
 # Application definition
 
@@ -65,13 +63,12 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-SITE_ID = os.getenv("SITE_ID")
+SITE_ID = int(os.getenv("SITE_ID"))
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 )
-
 
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_LOGOUT_ON_GET = True
@@ -112,7 +109,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'BreakoutBlack.wsgi.application'
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
@@ -128,6 +124,7 @@ if os.getenv("USE_S3"):
     STATIC_LOCATION = "static"
     AWS_LOCATION = "static"
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+    STATIC_ROOT = os.path.join(BASE_DIR, "static/")
     # don't need AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
     # STATICFILES_STORAGE = 'core.storage_backends.StaticStorage'
     # s3 public media settings
@@ -136,14 +133,13 @@ if os.getenv("USE_S3"):
     MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}"
     # DEFAULT_FILE_STORAGE = 'core.storage_backends.PublicMediaStorage'
 else:
-    STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+    STATIC_URL = 'static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, "static/")
     MEDIA_URL = '/mediafiles/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
-
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
-#if int(os.getenv("PRODUCTION")):
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "staticfiles/"),)
+# if int(os.getenv("PRODUCTION")):
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_URL = "/mediafiles/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
@@ -192,7 +188,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -204,22 +199,18 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+ACCOUNT_FORMS = {'login': 'store.form.login.StoreLoginForm'}
 
 LOGIN_REDIRECT_URL = "store:home"
 LOGOUT_REDIRECT_URL = "store:home"
 
-if os.getenv("PRODUCTION"):
-    django_heroku.settings(locals())
-
-CSRF_TRUSTED_ORIGINS = ["http://localhost:8000", 'https://www.breakoutblack.biz', 'https://breakoutblack.biz',]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8000", 'https://www.breakoutblack.biz', 'https://breakoutblack.biz', ]
 
 CORS_ALLOWED_ORIGINS = ['http://localhost:8000', 'https://www.breakoutblack.biz', 'https://breakoutblack.biz', ]
 

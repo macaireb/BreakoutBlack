@@ -1,5 +1,5 @@
 
-from store.form.custom_product import RequestProductForm
+from store.form.product import RequestProductForm
 from django.shortcuts import render, redirect
 
 

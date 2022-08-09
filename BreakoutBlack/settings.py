@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',  # new
+    'storages',
     'store',
     "crispy_forms",
     "allauth",
@@ -111,7 +112,7 @@ WSGI_APPLICATION = 'BreakoutBlack.wsgi.application'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-
+USE_S3 = int(os.getenv('USE_S3'))
 if os.getenv("USE_S3"):
     # aws settings
     AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
@@ -125,24 +126,22 @@ if os.getenv("USE_S3"):
     AWS_LOCATION = "static"
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
     STATIC_ROOT = os.path.join(BASE_DIR, "static/")
-    # don't need AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
-    # STATICFILES_STORAGE = 'core.storage_backends.StaticStorage'
+    AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
+    STATICFILES_STORAGE = 'store.storage_backends.StaticStorage'
     # s3 public media settings
     PUBLIC_MEDIA_LOCATION = "media"
     MEDIAFILES_LOCATION = "media"
-    MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}"
-    # DEFAULT_FILE_STORAGE = 'core.storage_backends.PublicMediaStorage'
+    MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/"
+    # DEFAULT_FILE_STORAGE = 'store.storage_backends.PublicMediaStorage'
 else:
     STATIC_URL = 'static/'
     STATIC_ROOT = os.path.join(BASE_DIR, "static/")
     MEDIA_URL = '/mediafiles/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "staticfiles/"),)
 # if int(os.getenv("PRODUCTION")):
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-MEDIA_URL = "/mediafiles/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

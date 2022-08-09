@@ -18,14 +18,17 @@
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <ul class="nav flex-column">
-        {% if request.user.is_authenticated %}
         <li class="nav-item order-1">
-            <a href="{% url 'store:new_product' %}" class="nav-link" target="_self">
+            <a href="{% url 'store:upload_product' %}" class="nav-link" target="_self">
                 Add Product
             </a>
         </li>
+        <li class="nav-item order-3">
+            <a href="{% url 'store:Updates' %}" class="nav-link" target="_self">View Updates</a>
+        </li>
+        {% if request.user.is_authenticated %}
         <li class="nav-item order-2">
-            <a href="{% url 'store:new_product' %}" class="nav-link" target="_self">
+            <a href="{% url 'store:upload_product' %}" class="nav-link" target="_self">
                 Add Product Category
             </a>
         </li>
@@ -52,11 +55,11 @@
                 Login
             </a>
         </li>
+        {% endif %}
         <li class="nav-item order-8">
             <a href="{% url 'store:custom product' %} " class="nav-link" target="_self">
                 Request a Custom Product
             </a>
         </li>
-        {% endif %}
     </ul>
 </div>

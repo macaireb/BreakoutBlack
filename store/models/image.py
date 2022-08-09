@@ -1,4 +1,5 @@
 from django.db import models
+from store.storage_backends import PublicMediaStorage
 
 
 class ImageAlbum(models.Model):
@@ -16,10 +17,10 @@ class ImageAlbum(models.Model):
 
 
 class Image(models.Model):
-    image_url = models.URLField(blank=True, null=True)
-    name = models.CharField(max_length=255)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    file = models.FileField(storage=PublicMediaStorage())
     album = models.ForeignKey(ImageAlbum, related_name='images', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return str(self.file.url)
 

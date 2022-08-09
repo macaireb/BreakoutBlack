@@ -1,87 +1,58 @@
 {% extends "base.html" %}
 {% block head_title %}Request Custom Product{% endblock head_title %}
 {% block extra_head %}
-<style>
-    .form-control {
-        background-color: gray!important;
-    }
-
-    .form-outline .form-control {
-        background-color: gray!important;
-    }
-
-
-
-
-
-
-
-
-</style>
 {% endblock extra_head %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="container-fluid m-5 p-4 col-10">
+<div class="container-fluid m-2 p-4 col-10">
     <h2 class="text-black text-center">Request Custom Product</h2>
     <div class="flex-column d-flex justify-content-center">
-        <form class="text-white form-group" action="." method="POST" enctype="multipart/form-data">
+        <form class="form-group" action="." method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {% if request.user.is_anonymous %}
-            <div class="row mb-4">
+            <div class="row mb-4 d-flex">
                 <div class="col">
-                    <div class="form-outline">
                         {{form.first|as_crispy_field}}
-                    </div>
                 </div>
                 <div class="col">
-                    <div class="form-outline">
                         {{form.last|as_crispy_field}}
-                    </div>
                 </div>
             </div>
-            <div class="row mb-4">
+            <div class="row mb-4 d-flex">
                 <div class="col">
-                    <div class="form-outline">
                         {{form.phone|as_crispy_field}}
-                    </div>
                 </div>
                 <div class="col">
-                    <div class="form-outline">
                         {{form.email|as_crispy_field}}
-                    </div>
                 </div>
             </div>
             {% endif %}
-            <div class="row mb-4">
-                <div class="form-outline">
+            <div class="row mb-4 d-flex">
                     {{form.category|as_crispy_field}}
-                </div>
             </div>
-            <div class="row mb-4">
-                <div class="form-outline">
+            <div class="row mb-4 d-flex">
                     {{form.message|as_crispy_field}}
-                </div>
             </div>
             {% if request.user.is_authenticated %}
             <!-- Default switch -->
             <div class="form-check form-switch row mb-4">
-                <div class="form-outline">
                     <input class="form-check-input" type="checkbox" role="switch" id="image_switch"
                            name="image_switch"/>
                     <label class="form-check-label" for="image_switch">Would you like to attach an image?</label>
-                </div>
             </div>
             <div class="row mb-4" id="image_container">
-                <div class="form-outline">
                     <label class="form-check-label" for="item_image">
                         Upload a photo
                     </label>
                     <input type="file" name="item_image" id="item_image" class="form-control">
-                </div>
             </div>
             {% endif %}
             <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-block">Send Request</button>
+            <div class="d-grid">
+                <button id="submit" class="btn btn-primary btn-block m-2">
+                    <span id="button-text">Send Request</span>
+                </button>
+            </div>
         </form>
     </div>
     <div class="flex-column d-flex">

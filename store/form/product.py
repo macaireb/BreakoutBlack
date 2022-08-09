@@ -1,4 +1,5 @@
 from django import forms
+from store.models.product import Item
 CATEGORY_CHOICES = (
     ('P', "Pants"),
     ('S', "Shoes"),
@@ -21,3 +22,14 @@ class RequestProductForm(forms.Form):
         widget=forms.Textarea(attrs={
             'rows': 4
         }))
+
+
+class UploadProductForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = '__all__'
+        exclude = ('album', 'image_url',)
+
+    widgets = {
+        'description': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+    }

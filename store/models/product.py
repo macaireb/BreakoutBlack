@@ -23,7 +23,8 @@ def add_category(add):
             if cat.name == add:
                 existed = True
         if not existed:
-            Category.objects.create(name=add)
+            catty = Category.objects.create(name=add)
+            catty.save()
 
 
 def default_category():

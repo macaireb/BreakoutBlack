@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block head_title %}Add new product{% endblock head_title %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<div class="container-fluid m-2 p-4 col-10">
+    <h2 class="text-black text-center">New Product</h2>
+    <div class="flex-column d-flex justify-content-center">
+        <form action="{% url 'store:upload_product' %}" method="POST" enctype="multipart/form-data"
+              class="form-group">
+            {% csrf_token %}
+            <input type="file" name="item_image" class="form-control">
+
+            <div class="row mb-4">
+                <div class="col">
+                    {{ form.title|as_crispy_field }}
+                </div>
+                <div class="col">
+                    {{ form.price|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col">
+                    {{ form.category|as_crispy_field }}
+                </div>
+                <div class="col">
+                    {{ form.slug|as_crispy_field }}
+                </div>
+            </div>
+            <div class="col">
+                {{ form.description|as_crispy_field }}
+            </div>
+            <div class="d-grid">
+                <button id="submit" class="btn btn-primary btn-block m-2">
+                    <span id="button-text">Submit</span>
+                </button>
+            </div>
+        </form>
+        {% if image %}
+        <img src=" {{ image.file.url }}" class="card-img-top" alt="">
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+<!--Main layout-->

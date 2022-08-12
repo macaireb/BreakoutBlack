@@ -17,14 +17,13 @@ CATEGORY_CHOICES = (
 
 def add_category(add):
     cats = Category.objects.all()
-    existed = False
-    if cats:
-        for cat in cats:
-            if cat.name == add:
-                existed = True
-        if not existed:
-            catty = Category.objects.create(name=add)
-            catty.save()
+    novel = True
+    for cat in cats:
+        if cat.name == add:
+            novel = False
+    if novel:
+        catty = Category.objects.create(name=add)
+        catty.save()
 
 
 def default_category():
@@ -160,3 +159,6 @@ class Order(models.Model):
             total -= self.coupon.amount
         return total
 
+
+print("about to add categories")
+default_category()

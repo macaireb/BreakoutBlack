@@ -1,19 +1,10 @@
 from django import forms
-from store.models.product import Item
-CATEGORY_CHOICES = (
-    ('P', "Pants"),
-    ('S', "Shoes"),
-    ("Sh", "Shirt"),
-    ("So", "Socks"),
-    ("Sho", "Shorts"),
-    ("C", "Child"),
-)
+
+from store.models.product import Item, CATEGORY_CHOICES, Category
 
 
 class RequestProductForm(forms.Form):
     category = forms.ChoiceField(widget=forms.Select, choices=CATEGORY_CHOICES, required=False)
-    # size = forms.CharField(required=False)
-    # color = forms.ChoiceField(widget=forms.Select, choices=Item.Color.choices, required=False)
     first = forms.CharField(required=False)
     last = forms.CharField(required=False)
     phone = forms.CharField(required=False, max_length=15)
@@ -30,6 +21,21 @@ class UploadProductForm(forms.ModelForm):
         fields = '__all__'
         exclude = ('album', 'image_url',)
 
+    description = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 4
+        }))
+
+    category = forms.ChoiceField(widget=forms.Select, choices=CATEGORY_CHOICES, required=False)
+
     widgets = {
         'description': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
     }
+
+
+class NewCategory(forms.ModelForm):
+    class Meta:
+        fields = ('name',)
+        model = Category
+
+    name = forms.CharField()

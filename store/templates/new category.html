@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block head_title %}New Category{% endblock head_title %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container-fluid col-10">
+    <h2 class="offset-4">New Category</h2>
+    <ul class="list-group list-group-light m-5">
+        <li class="list-group-item active text-white" aria-current="true">
+            <form class="form-group" action="." method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {{ form.name|as_crispy_field}}
+            </form>
+        </li>
+    </ul>
+
+{% if categories %}
+    <h2 class="offset-4 mt-5">Current Categories</h2>
+    <ul class="list-group list-group-light">
+        {% for category in categories %}
+            <li class="list-group-item active text-black bg-white"  aria-current="true">
+                {{category.name}}
+            </li>
+        {% endfor %}
+        </ul>
+</div>
+{% endif %}
+{% endblock %}

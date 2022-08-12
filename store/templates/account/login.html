@@ -16,13 +16,14 @@
                     {% if request.user.is_anonymous %}
                     <h1>{% trans "Sign In" %}</h1>
 
-                    <a href="{% provider_login_url 'google' %} " class="badge rounded-pill badge-danger" target="_self">
+                    <a href="{% provider_login_url 'google' %} " class="badge rounded-pill bg-secondary" target="_self">
                         Login with Google
                     </a>
                     <span>
                         <hr/>
                         <b>Or</b>
                     </span>
+
                     <form class="login" method="POST" action="{% url 'account_login' %}">
                         {% csrf_token %}
                         {{ form | crispy}}

@@ -23,15 +23,15 @@
                 Add Product
             </a>
         </li>
+        <li class="nav-item order-2">
+            <a href="{% url 'store:new category' %}" class="nav-link" target="_self">
+                Add Product Category
+            </a>
+        </li>
         <li class="nav-item order-3">
             <a href="{% url 'store:Updates' %}" class="nav-link" target="_self">View Updates</a>
         </li>
         {% if request.user.is_authenticated %}
-        <li class="nav-item order-2">
-            <a href="{% url 'store:upload_product' %}" class="nav-link" target="_self">
-                Add Product Category
-            </a>
-        </li>
         <li class="nav-item nav-flex-icons order-4">
             <a href="{% url 'store:home' %}" class="nav-link" target="_self">
                                 <span class="badge red z-depth-1 me-1" id="cart"> <i class="fas fa-shopping-cart"></i>
